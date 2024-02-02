@@ -1,0 +1,31 @@
+
+leadIdLong = input.leadId.toLong();
+leadDetails = zoho.crm.getRecordById("Leads",leadIdLong);
+mp = map();
+mp.put("Name",ifnull(leadDetails.get("Full_Name"),""));
+mp.put("Annual_Revenue", ifnull(leadDetails.get("Annual_Revenue"),""));
+mp.put("Billing_City", ifnull(leadDetails.get("City"),""));
+mp.put("Billing_Country", ifnull(leadDetails.get("Country"),""));
+mp.put("Description", ifnull(leadDetails.get("Description"),""));
+mp.put("Fax", ifnull(leadDetails.get("Fax"),""));
+mp.put("Industry", ifnull(leadDetails.get("Industry"),""));
+mp.put("Employees", ifnull(leadDetails.get("No_of_Employees"),""));
+mp.put("Phone", ifnull(leadDetails.get("Phone"),""));
+mp.put("Rating", ifnull(leadDetails.get("Rating"),""));
+mp.put("Billing_State", ifnull(leadDetails.get("State"),""));
+mp.put("Billing_Street", ifnull(leadDetails.get("Street"),""));
+mp.put("Billing_Code", ifnull(leadDetails.get("Zip_Code"),""));
+mp.put("Website", ifnull(leadDetails.get("Website"),""));
+create = zoho.crm.create("CustomModule1apiname", mp);
+info mp;
+info create;
+
+CustommoduleDetails = zoho.crm.getRecordById("CustomModule1apiname", input.CustommoduleId.toLong());
+createMap = map();
+createMap.put("Name", ifnull(CustommoduleDetails.get("Name"),""));
+createMap.put("Owner", ifnull(CustommoduleDetails.get("Owner"),"").get("id"));
+createMap.put("Phone", ifnull(CustommoduleDetails.get("Phone"),""));
+createMap.put("Email", ifnull(CustommoduleDetails.get("Email"),""));
+createCustomModule = zoho.crm.create("CustomModule2apiname", createMap);
+info createMap;
+info createCustomModule;
